@@ -235,7 +235,7 @@ exportBtn.addEventListener("click", async () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "env-marker-config.json";
+  a.download = "envmarker-config.json";
   a.click();
   URL.revokeObjectURL(url);
   showToast("Exported!");

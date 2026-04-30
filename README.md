@@ -1,6 +1,6 @@
-# Environment Marker
+# EnvMarker
 
-A Chrome extension that visually marks web pages by environment (production, staging, development, local) with a subtle label and badge — so you never accidentally operate on the wrong environment.
+A Chrome extension that subtly shows which environment you're on — production, staging, dev, or local — so you never accidentally operate on the wrong one.
 
 ## Features
 

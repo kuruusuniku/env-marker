@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Environment Marker",
+  "name": "EnvMarker",
   "version": "1.0.0",
-  "description": "Visually mark web pages by environment (production, staging, development, local) with colored banners and badges.",
+  "description": "Subtle environment indicator — instantly see if you're on production, staging, dev, or local.",
   "permissions": [
     "storage",
     "activeTab"
