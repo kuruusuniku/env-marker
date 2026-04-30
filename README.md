@@ -55,19 +55,16 @@ The extension icon will appear in the toolbar.
 
 ## Default Rules
 
-| Environment | Pattern | Color | Notes |
-|-------------|---------|-------|-------|
-| Local | `localhost*` | Blue | |
-| Local | `127.0.0.1*` | Blue | |
-| Local | `*.local` | Blue | /etc/hosts custom domains (e.g. `myapp.local`) |
-| Local | `*.test` | Blue | RFC 2606 reserved TLD |
-| Development | `*.dev.*` | Green | e.g. `app.dev.example.com` |
-| Development | `*.internal` | Green | /etc/hosts or internal DNS |
-| Staging | `*.stg.*` | Orange | |
-| Staging | `*.staging.*` | Orange | |
-| Production | `*.example.com` | Red | Disabled by default — customize for your domains |
+| Environment | Pattern | Color | Examples |
+|-------------|---------|-------|----------|
+| Local | `*local*` | Blue | `localhost`, `myapp.local`, `local.myapp.com` |
+| Local | `127.0.0.1*` | Blue | `127.0.0.1`, `127.0.0.1:3000` |
+| Development | `*dev*` | Green | `dev.example.com`, `myapp.dev.internal` |
+| Staging | `*stg*` | Orange | `stg.example.com`, `app.stg.internal` |
+| Staging | `*staging*` | Orange | `staging.example.com` |
+| Production | `*.example.com` | Red | Disabled by default — customize |
 
-Supports `/etc/hosts` custom domains: if you map `myapp.local` or `myapp.test` to `127.0.0.1`, these are detected automatically.
+Hostname matching is simple: if the hostname contains `local`, `dev`, or `stg`, it matches. Works with `/etc/hosts` custom domains, internal DNS, and any naming convention.
 
 Edit rules in Settings to match your infrastructure.
 
