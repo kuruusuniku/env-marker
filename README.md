@@ -59,7 +59,8 @@ The extension icon will appear in the toolbar.
 |-------------|---------|-------|----------|
 | Local | `*local*` | Blue | `localhost`, `myapp.local`, `local.myapp.com` |
 | Local | `127.0.0.1*` | Blue | `127.0.0.1`, `127.0.0.1:3000` |
-| Development | `*dev*` | Green | `dev.example.com`, `myapp.dev.internal` |
+| Development | `dev.*` | Green | `dev.example.com`, `dev.myapp.io` |
+| Development | `*.dev.*` | Green | `app.dev.example.com`, `myapp.dev.internal` |
 | Staging | `*stg*` | Orange | `stg.example.com`, `app.stg.internal` |
 | Staging | `*staging*` | Orange | `staging.example.com` |
 | Production | `*.example.com` | Red | Disabled by default — customize |

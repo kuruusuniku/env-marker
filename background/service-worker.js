@@ -15,7 +15,11 @@ const DEFAULT_RULES = [
     type: "hostname", env: "local", color: "#3182ce", textColor: "#ffffff", enabled: true
   },
   {
-    id: "default-dev", name: "Development", pattern: "*dev*",
+    id: "default-dev-prefix", name: "Development", pattern: "dev.*",
+    type: "hostname", env: "development", color: "#38a169", textColor: "#ffffff", enabled: true
+  },
+  {
+    id: "default-dev-middle", name: "Development", pattern: "*.dev.*",
     type: "hostname", env: "development", color: "#38a169", textColor: "#ffffff", enabled: true
   },
   {
