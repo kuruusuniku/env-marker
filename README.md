@@ -1,25 +1,25 @@
 # Environment Marker
 
-A Chrome extension that visually marks web pages by environment (production, staging, development, local) with colored banners and action badges.
-
-Identify which environment you're looking at — instantly, without checking the URL.
+A Chrome extension that visually marks web pages by environment (production, staging, development, local) with a subtle label and badge — so you never accidentally operate on the wrong environment.
 
 ## Features
 
-- **Color-coded banners** at the top/bottom of pages
-- **Badge on extension icon** showing PROD / STG / DEV / LOCAL
-- **Hostname or URL pattern matching** with glob syntax (`*.example.com`, `localhost*`)
-- **Rule priority** — first match wins, drag to reorder
+- **Subtle top-left label** — small, semi-transparent indicator that doesn't interfere with the page
+- **Badge on extension icon** — shows PROD / STG / DEV / LOCAL at a glance
+- **Keyword-based hostname matching** — if the hostname contains `local`, `dev`, `stg`, etc., it's detected automatically
+- **Glob pattern support** — `*local*`, `dev.*`, `*.stg.*`, `127.0.0.1*`
+- **Works with /etc/hosts** — custom domains like `myapp.local` or `myapp.test` are recognized
+- **Rule priority** — first match wins, reorder in settings
 - **Per-rule enable/disable** and global ON/OFF toggle
 - **Import / Export** settings as JSON
-- **Zero external dependencies** — no remote code, no data leaves your browser
-- **Manifest V3** — modern, secure extension architecture
+- **Zero external dependencies** — no remote code, no network requests, all data stays in your browser
+- **Manifest V3** — modern, secure Chrome extension architecture
 
 ## Install (Developer Mode)
 
 1. Clone this repository:
    ```
-   git clone https://github.com/<your-username>/env-marker.git
+   git clone https://github.com/kuruusuniku/env-marker.git
    ```
 2. Open Chrome and go to `chrome://extensions/`
 3. Enable **Developer mode** (toggle in top-right)
@@ -28,25 +28,38 @@ Identify which environment you're looking at — instantly, without checking the
 
 The extension icon will appear in the toolbar.
 
+## インストール方法（開発者モード）
+
+1. リポジトリをクローン:
+   ```
+   git clone https://github.com/kuruusuniku/env-marker.git
+   ```
+2. Chrome で `chrome://extensions/` を開く
+3. 右上の **デベロッパー モード** をONにする
+4. **パッケージ化されていない拡張機能を読み込む** をクリック
+5. クローンした `env-marker` フォルダを選択
+
+ツールバーに拡張機能のアイコンが表示されます。
+
 ## Usage
 
 1. Click the extension icon to see the current page's environment
 2. Use the **global toggle** to enable/disable
 3. Click **Settings** to open the options page
-4. Add rules with hostname/URL patterns:
-   - `localhost*` → Local (blue)
-   - `*.stg.example.com` → Staging (orange)
-   - `*.example.com` → Production (red)
+4. Add or edit rules to match your environment naming conventions
 5. Rules are evaluated top-to-bottom — **first match wins**
 
 ### Pattern Syntax
 
 | Pattern | Matches |
 |---------|---------|
-| `localhost*` | `localhost`, `localhost:3000` |
-| `*.stg.example.com` | `app.stg.example.com`, `api.stg.example.com` |
-| `*.example.com` | `app.example.com`, `www.example.com` |
-| `192.168.*` | `192.168.1.1`, `192.168.0.100` |
+| `*local*` | `localhost`, `myapp.local`, `local.test` |
+| `dev.*` | `dev.example.com`, `dev.myapp.io` |
+| `*.dev.*` | `app.dev.example.com` |
+| `*stg*` | `stg.example.com`, `app-stg.internal` |
+| `127.0.0.1*` | `127.0.0.1`, `127.0.0.1:3000` |
+
+`*` matches any characters, `?` matches a single character. Matching is case-insensitive.
 
 ### Match Types
 
@@ -63,11 +76,11 @@ The extension icon will appear in the toolbar.
 | Development | `*.dev.*` | Green | `app.dev.example.com`, `myapp.dev.internal` |
 | Staging | `*stg*` | Orange | `stg.example.com`, `app.stg.internal` |
 | Staging | `*staging*` | Orange | `staging.example.com` |
-| Production | `*.example.com` | Red | Disabled by default — customize |
+| Production | `*.example.com` | Red | Disabled by default — customize for your domains |
 
-Hostname matching is simple: if the hostname contains `local`, `dev`, or `stg`, it matches. Works with `/etc/hosts` custom domains, internal DNS, and any naming convention.
+> **Note:** `.dev` is a real TLD (e.g., `web.dev`), so the dev rules use `dev.*` and `*.dev.*` instead of `*dev*` to avoid false positives.
 
-Edit rules in Settings to match your infrastructure.
+Works with `/etc/hosts` custom domains, internal DNS, and any naming convention. Edit rules in Settings to match your infrastructure.
 
 ## Permissions
 
@@ -86,8 +99,8 @@ env-marker/
 ├── background/
 │   └── service-worker.js  # Badge updates, message handling
 ├── content/
-│   ├── content.js         # Banner injection
-│   └── content.css        # Banner styles
+│   ├── content.js         # Label injection
+│   └── content.css        # Label styles
 ├── popup/
 │   ├── popup.html         # Quick status popup
 │   └── popup.js
