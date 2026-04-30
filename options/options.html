@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Environment Marker - Settings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 14px;
+      color: #1a1a1a;
+      background: #f5f5f5;
+      padding: 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 22px; margin-bottom: 20px; }
+    h2 { font-size: 16px; margin-bottom: 12px; color: #333; }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+    .setting-row + .setting-row {
+      border-top: 1px solid #eee;
+    }
+
+    .toggle {
+      position: relative;
+      width: 40px;
+      height: 22px;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .toggle .slider {
+      position: absolute; inset: 0; background: #ccc;
+      border-radius: 11px; cursor: pointer; transition: background 0.2s;
+    }
+    .toggle .slider::before {
+      content: ""; position: absolute; width: 18px; height: 18px;
+      left: 2px; top: 2px; background: #fff;
+      border-radius: 50%; transition: transform 0.2s;
+    }
+    .toggle input:checked + .slider { background: #38a169; }
+    .toggle input:checked + .slider::before { transform: translateX(18px); }
+
+    select {
+      padding: 6px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .rules-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-primary { background: #3182ce; color: #fff; }
+    .btn-primary:hover { background: #2b6cb0; }
+    .btn-danger { background: #e53e3e; color: #fff; }
+    .btn-danger:hover { background: #c53030; }
+    .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+    .rule-item {
+      background: #fafafa;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .rule-item.disabled { opacity: 0.5; }
+
+    .rule-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .rule-env-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .rule-fields {
+      display: grid;
+      grid-template-columns: 1fr 100px 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .rule-fields label {
+      font-size: 11px;
+      color: #666;
+      display: block;
+      margin-bottom: 3px;
+    }
+    .rule-fields input, .rule-fields select {
+      width: 100%;
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .rule-colors {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .rule-colors label { font-size: 11px; color: #666; }
+    .rule-colors input[type="color"] {
+      width: 32px; height: 28px;
+      border: 1px solid #ddd; border-radius: 4px;
+      cursor: pointer; padding: 0;
+    }
+
+    .rule-actions {
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+      margin-top: 8px;
+    }
+
+    .export-import {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+  <h1>Environment Marker Settings</h1>
+
+  <div class="card">
+    <h2>General</h2>
+    <div class="setting-row">
+      <span>Enable Environment Marker</span>
+      <label class="toggle">
+        <input type="checkbox" id="globalEnabled">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <span>Show Banner</span>
+      <label class="toggle">
+        <input type="checkbox" id="showBanner">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <span>Show Badge</span>
+      <label class="toggle">
+        <input type="checkbox" id="showBadge">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="setting-row">
+      <span>Banner Position</span>
+      <select id="bannerPosition">
+        <option value="top">Top</option>
+        <option value="bottom">Bottom</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="rules-header">
+      <h2>Matching Rules</h2>
+      <button class="btn btn-primary" id="addRule">+ Add Rule</button>
+    </div>
+    <div id="rulesList"></div>
+
+    <div class="export-import">
+      <button class="btn btn-sm" id="exportRules" style="background:#eee;">Export</button>
+      <button class="btn btn-sm" id="importRules" style="background:#eee;">Import</button>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>
