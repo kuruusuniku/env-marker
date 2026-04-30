@@ -15,29 +15,48 @@ A Chrome extension that subtly shows which environment you're on — production,
 - **Zero external dependencies** — no remote code, no network requests, all data stays in your browser
 - **Manifest V3** — modern, secure Chrome extension architecture
 
-## Install (Developer Mode)
+## Install
+
+### Option A: Download ZIP (no git required)
+
+1. Go to the [repository page](https://github.com/kuruusuniku/env-marker)
+2. Click the green **Code** button → **Download ZIP**
+3. Unzip the downloaded file
+4. Open Chrome and go to `chrome://extensions/`
+5. Enable **Developer mode** (toggle in top-right)
+6. Click **Load unpacked**
+7. Select the unzipped `env-marker-main` folder
+
+### Option B: git clone
 
 1. Clone this repository:
    ```
    git clone https://github.com/kuruusuniku/env-marker.git
    ```
-2. Open Chrome and go to `chrome://extensions/`
-3. Enable **Developer mode** (toggle in top-right)
-4. Click **Load unpacked**
-5. Select the `env-marker` folder
+2. Open Chrome → `chrome://extensions/`
+3. Enable **Developer mode** → Click **Load unpacked** → Select the `env-marker` folder
 
 The extension icon will appear in the toolbar.
 
-## インストール方法（開発者モード）
+## インストール方法
+
+### 方法A: ZIPダウンロード（gitが不要）
+
+1. [リポジトリページ](https://github.com/kuruusuniku/env-marker) を開く
+2. 緑色の **Code** ボタン → **Download ZIP** をクリック
+3. ダウンロードしたZIPを展開する
+4. Chrome で `chrome://extensions/` を開く
+5. 右上の **デベロッパー モード** をONにする
+6. **パッケージ化されていない拡張機能を読み込む** をクリック
+7. 展開した `env-marker-main` フォルダを選択
+
+### 方法B: git clone
 
 1. リポジトリをクローン:
    ```
    git clone https://github.com/kuruusuniku/env-marker.git
    ```
-2. Chrome で `chrome://extensions/` を開く
-3. 右上の **デベロッパー モード** をONにする
-4. **パッケージ化されていない拡張機能を読み込む** をクリック
-5. クローンした `env-marker` フォルダを選択
+2. Chrome で `chrome://extensions/` → **デベロッパー モード** ON → **パッケージ化されていない拡張機能を読み込む** → `env-marker` フォルダを選択
 
 ツールバーに拡張機能のアイコンが表示されます。
 
