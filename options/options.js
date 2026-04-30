@@ -3,22 +3,15 @@
  */
 
 const DEFAULT_RULES = [
-  {
-    id: "default-prod", name: "Production", pattern: "*.example.com",
-    type: "hostname", env: "production", color: "#e53e3e", textColor: "#ffffff", enabled: true
-  },
-  {
-    id: "default-stg", name: "Staging", pattern: "*.stg.example.com",
-    type: "hostname", env: "staging", color: "#dd6b20", textColor: "#ffffff", enabled: true
-  },
-  {
-    id: "default-dev", name: "Development", pattern: "*.dev.example.com",
-    type: "hostname", env: "development", color: "#38a169", textColor: "#ffffff", enabled: true
-  },
-  {
-    id: "default-local", name: "Local", pattern: "localhost*",
-    type: "hostname", env: "local", color: "#3182ce", textColor: "#ffffff", enabled: true
-  }
+  { id: "default-localhost", name: "Local", pattern: "localhost*", type: "hostname", env: "local", color: "#3182ce", textColor: "#ffffff", enabled: true },
+  { id: "default-127", name: "Local", pattern: "127.0.0.1*", type: "hostname", env: "local", color: "#3182ce", textColor: "#ffffff", enabled: true },
+  { id: "default-dot-local", name: "Local", pattern: "*.local", type: "hostname", env: "local", color: "#3182ce", textColor: "#ffffff", enabled: true },
+  { id: "default-dot-test", name: "Local", pattern: "*.test", type: "hostname", env: "local", color: "#3182ce", textColor: "#ffffff", enabled: true },
+  { id: "default-dev", name: "Development", pattern: "*.dev.*", type: "hostname", env: "development", color: "#38a169", textColor: "#ffffff", enabled: true },
+  { id: "default-dev-internal", name: "Development", pattern: "*.internal", type: "hostname", env: "development", color: "#38a169", textColor: "#ffffff", enabled: true },
+  { id: "default-stg", name: "Staging", pattern: "*.stg.*", type: "hostname", env: "staging", color: "#dd6b20", textColor: "#ffffff", enabled: true },
+  { id: "default-staging", name: "Staging", pattern: "*.staging.*", type: "hostname", env: "staging", color: "#dd6b20", textColor: "#ffffff", enabled: true },
+  { id: "default-prod", name: "Production", pattern: "*.example.com", type: "hostname", env: "production", color: "#e53e3e", textColor: "#ffffff", enabled: false }
 ];
 
 const DEFAULT_SETTINGS = {

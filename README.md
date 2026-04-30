@@ -55,14 +55,21 @@ The extension icon will appear in the toolbar.
 
 ## Default Rules
 
-| Environment | Pattern | Color |
-|-------------|---------|-------|
-| Production | `*.example.com` | Red |
-| Staging | `*.stg.example.com` | Orange |
-| Development | `*.dev.example.com` | Green |
-| Local | `localhost*` | Blue |
+| Environment | Pattern | Color | Notes |
+|-------------|---------|-------|-------|
+| Local | `localhost*` | Blue | |
+| Local | `127.0.0.1*` | Blue | |
+| Local | `*.local` | Blue | /etc/hosts custom domains (e.g. `myapp.local`) |
+| Local | `*.test` | Blue | RFC 2606 reserved TLD |
+| Development | `*.dev.*` | Green | e.g. `app.dev.example.com` |
+| Development | `*.internal` | Green | /etc/hosts or internal DNS |
+| Staging | `*.stg.*` | Orange | |
+| Staging | `*.staging.*` | Orange | |
+| Production | `*.example.com` | Red | Disabled by default — customize for your domains |
 
-Edit these in Settings to match your infrastructure.
+Supports `/etc/hosts` custom domains: if you map `myapp.local` or `myapp.test` to `127.0.0.1`, these are detected automatically.
+
+Edit rules in Settings to match your infrastructure.
 
 ## Permissions
 
