@@ -101,6 +101,60 @@ The extension icon will appear in the toolbar.
 
 Works with `/etc/hosts` custom domains, internal DNS, and any naming convention. Edit rules in Settings to match your infrastructure.
 
+## Import / Export
+
+Settings → **Export** で現在の設定をJSONファイルに保存、**Import** でJSONファイルから読み込めます。
+チーム内で設定を共有したい場合に便利です。
+
+### JSON format
+
+```json
+{
+  "rules": [
+    {
+      "id": "my-rule-1",
+      "name": "Local",
+      "pattern": "*local*",
+      "type": "hostname",
+      "env": "local",
+      "color": "#3182ce",
+      "textColor": "#ffffff",
+      "enabled": true
+    }
+  ],
+  "settings": {
+    "globalEnabled": true,
+    "showBanner": true,
+    "showBadge": true,
+    "bannerPosition": "top"
+  }
+}
+```
+
+### Rule fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique rule ID |
+| `name` | string | Display name (shown in banner and badge) |
+| `pattern` | string | Glob pattern (`*local*`, `dev.*`, `*.stg.*`, etc.) |
+| `type` | `"hostname"` / `"url"` | Match against hostname only, or full URL |
+| `env` | string | `production`, `staging`, `development`, `local`, or `custom` |
+| `color` | string | Background color (hex, e.g. `#e53e3e`) |
+| `textColor` | string | Text color (hex, e.g. `#ffffff`) |
+| `enabled` | boolean | Enable / disable this rule |
+
+### Settings fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `globalEnabled` | boolean | Master ON/OFF switch |
+| `showBanner` | boolean | Show label on page |
+| `showBadge` | boolean | Show badge on extension icon |
+| `bannerPosition` | `"top"` / `"bottom"` | Label position |
+
+`rules` のみ、`settings` のみのファイルでもインポートできます。既存の設定は上書きされます。
+
 ## Permissions
 
 | Permission | Reason |
